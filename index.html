@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>PhotoEditor</title>
+</head>
+<body>
+    
+    <div id="canvas-container">
+        <div class="tool-panel">
+            <div class="upload-btn-container">
+                <div id="upload-btn" class="upload-btn">
+                    Перетащите файл сюда или кликните, чтобы выбрать
+                    <input type="file" id="upload-file" accept="image/*">
+                </div>
+                <div id="info-panel"></div>
+            </div>
+            <div>
+                <input type="text" id="image-url" placeholder="Введите URL ">
+                <button id="load-url-btn">Загрузить</button>
+            </div>
+        </div>
+        <div class="image-container">
+            <div class="image-display">
+                <canvas id="canvas" width="0" height="0"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
