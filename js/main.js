@@ -30,8 +30,12 @@ window.onload = function() {
     uploadBtn.addEventListener('drop', function(e) {
         e.preventDefault();
         const file = e.dataTransfer.files[0];
-        loadImageFromFile(file);
+        const rect = canvas.getBoundingClientRect();
+        const x = Math.floor(e.clientX - rect.left);
+        const y = Math.floor(e.clientY - rect.top);
+        loadImageFromFile(file, x, y);
     });
+        
 
     uploadBtn.addEventListener('click', function() {
         document.getElementById('upload-file').click();
@@ -51,7 +55,7 @@ window.onload = function() {
         }
     });
 
-    function loadImageFromFile(file) {
+    function loadImageFromFile(file, clientX, clientY) {
         const reader = new FileReader();
         reader.onload = function(event) {
             const img = new Image();
@@ -60,6 +64,12 @@ window.onload = function() {
                 canvas.height = img.height;
                 context.drawImage(img, 0, 0);
                 imgData = context.getImageData(0, 0, canvas.width, canvas.height);
+                if (clientX !== undefined && clientY !== undefined) {
+                    const rect = canvas.getBoundingClientRect();
+                    const x = Math.floor(clientX - rect.left);
+                    const y = Math.floor(clientY - rect.top);
+                    updateInfoPanel(x, y);
+                }
             }
             img.src = event.target.result;
         }
